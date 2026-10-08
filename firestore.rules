@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // User profile
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      // User chat sessions
+      match /sessions/{sessionId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // User cognitive memory files
+      match /memoryFiles/{fileId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // User multimodal media creations
+      match /mediaCreations/{mediaId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

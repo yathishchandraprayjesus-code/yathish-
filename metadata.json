@@ -1,0 +1,7 @@
+{
+  "name": "Claude Prompt Studio",
+  "description": "Interactive Claude system prompt simulation, chat studio, artifacts renderer, and memory inspector powered by Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

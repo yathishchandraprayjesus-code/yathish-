@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with display name and preferences",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email"]
+    },
+    "ChatSession": {
+      "title": "ChatSession",
+      "description": "Saved chat session history with messages",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "messages": { "type": "array" }
+      },
+      "required": ["userId", "title", "createdAt"]
+    },
+    "MemoryFile": {
+      "title": "MemoryFile",
+      "description": "Persistent cognitive memory file",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "path": { "type": "string" },
+        "description": { "type": "string" },
+        "content": { "type": "array" },
+        "version": { "type": "number" }
+      },
+      "required": ["userId", "path", "content"]
+    },
+    "MediaCreation": {
+      "title": "MediaCreation",
+      "description": "Generated multimodal assets including music, video, images, or transcriptions",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string" },
+        "prompt": { "type": "string" },
+        "mediaUrl": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["userId", "type", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile documents"
+    },
+    "/users/{userId}/sessions/{sessionId}": {
+      "schema": "ChatSession",
+      "description": "User conversation sessions"
+    },
+    "/users/{userId}/memoryFiles/{fileId}": {
+      "schema": "MemoryFile",
+      "description": "User memory files"
+    },
+    "/users/{userId}/mediaCreations/{mediaId}": {
+      "schema": "MediaCreation",
+      "description": "User multimodal media creations"
+    }
+  }
+}
